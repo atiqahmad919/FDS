@@ -133,32 +133,42 @@ class RestaurantListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kSecondary,
       appBar: AppBar(
+        centerTitle: true,
+        iconTheme: IconThemeData(color: kWhite),
         backgroundColor: kPrimary,
-        title: Text('Restaurants'),
+        title: Text(
+          'Restaurants',
+          style: TextStyle(color: kWhite),
+        ),
       ),
       body: ListView.builder(
         itemCount: restaurants.length,
         itemBuilder: (context, index) {
           final restaurant = restaurants[index];
           return Card(
+            elevation: 3,
             margin: EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: Image.asset(restaurant['imageUrl']),
-              title: Text(restaurant['name']),
-              subtitle: Text('Description of ${restaurant['name']}'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RestaurantDetailScreen(
-                      imageUrl: restaurant['imageUrl'],
-                      name: restaurant['name'],
-                      menuCategories:
-                          List<String>.from(restaurant['menuCategories']),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 16),
+              child: ListTile(
+                leading: Image.asset(restaurant['imageUrl']),
+                title: Text(restaurant['name']),
+                subtitle: Text('Description of ${restaurant['name']}'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RestaurantDetailScreen(
+                        imageUrl: restaurant['imageUrl'],
+                        name: restaurant['name'],
+                        menuCategories:
+                            List<String>.from(restaurant['menuCategories']),
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           );
         },

@@ -8,11 +8,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [Text('text')],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: Column(
+      //     children: [Text('text')],
+      //   ),
+      // ),
       // appBar: AppBar(
       //   backgroundColor: kPrimary,
       //   centerTitle: true,

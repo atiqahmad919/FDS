@@ -16,6 +16,7 @@ class HomePageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: kWhite,
       elevation: 5,
       margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(

@@ -19,9 +19,13 @@ class RestaurantDetailScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: kSecondary,
         appBar: AppBar(
+          iconTheme: IconThemeData(color: kWhite),
           centerTitle: true,
           backgroundColor: kPrimary,
-          title: Text(name),
+          title: Text(
+            name,
+            style: TextStyle(color: kWhite),
+          ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -29,6 +33,11 @@ class RestaurantDetailScreen extends StatelessWidget {
             },
           ),
           bottom: TabBar(
+            unselectedLabelColor: Colors.white60,
+            // labelColor: kWhite,
+            labelStyle:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            // dividerColor: kWhite,
             isScrollable: true,
             tabs:
                 menuCategories.map((category) => Tab(text: category)).toList(),
