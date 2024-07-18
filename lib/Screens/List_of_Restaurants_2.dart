@@ -1,47 +1,3 @@
-// import 'package:fds/Screens/Restaurant.dart';
-// import 'package:fds/constants.dart';
-// import 'package:flutter/material.dart';
-//
-// class List_of_Restaurants_2 extends StatelessWidget {
-//   final List<Map<String, String>> sampleData = List.generate(9, (index) {
-//     return {
-//       'title': 'Its Eatoo ${index + 1}',
-//       'imagePath': 'assets/images/icon_Restaurant_${index + 1}.png',
-//       'Description':
-//           'Pizza, Burger, Fries, Steaks, Chicken, Desserts, Cold Drinks',
-//     };
-//   });
-//
-//   List_of_Restaurants_2({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         backgroundColor: kSecondary,
-//         body: ListView.builder(
-//           itemCount: sampleData.length,
-//           itemBuilder: (context, index) {
-//             return GestureDetector(
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => const Restaurant()),
-//                 );
-//               },
-//               child: RestCard(
-//                 cardTitle: sampleData[index]['title']!,
-//                 imagePath: sampleData[index]['imagePath']!,
-//                 restDescription: sampleData[index]['Description']!,
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:fds/Screens/RestaurantDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:fds/constants.dart';
@@ -52,7 +8,14 @@ class RestaurantListScreen extends StatelessWidget {
     {
       'name': 'Restaurant 1',
       'imageUrl': 'assets/images/icon_Restaurant_1.png',
-      'menuCategories': ['Beverages', 'Burgers', 'Pizzas']
+      'menuCategories': [
+        'Appetizers',
+        'Main Course',
+        'Desserts',
+        'Beverages',
+        'Burgers',
+        'Pizzas'
+      ]
     },
     {
       'name': 'Restaurant 2',
@@ -128,15 +91,17 @@ class RestaurantListScreen extends StatelessWidget {
     },
   ];
 
+  RestaurantListScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondary,
       appBar: AppBar(
         centerTitle: true,
-        iconTheme: IconThemeData(color: kWhite),
+        iconTheme: const IconThemeData(color: kWhite),
         backgroundColor: kPrimary,
-        title: Text(
+        title: const Text(
           'Restaurants',
           style: TextStyle(color: kWhite),
         ),
@@ -145,29 +110,72 @@ class RestaurantListScreen extends StatelessWidget {
         itemCount: restaurants.length,
         itemBuilder: (context, index) {
           final restaurant = restaurants[index];
-          return Card(
-            elevation: 3,
-            margin: EdgeInsets.all(8.0),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 16),
-              child: ListTile(
-                leading: Image.asset(restaurant['imageUrl']),
-                title: Text(restaurant['name']),
-                subtitle: Text('Description of ${restaurant['name']}'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RestaurantDetailScreen(
-                        imageUrl: restaurant['imageUrl'],
-                        name: restaurant['name'],
-                        menuCategories:
-                            List<String>.from(restaurant['menuCategories']),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RestaurantDetailScreen(
+                    imageUrl: restaurant['imageUrl'],
+                    name: restaurant['name'],
+                    menuCategories:
+                        List<String>.from(restaurant['menuCategories']),
+                  ),
+                ),
+              );
+            },
+            child: Card(
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Container(
+                height: 130,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          bottomLeft: Radius.circular(10.0),
+                        ),
+                        child: Image.asset(
+                          restaurant['imageUrl'],
+                          fit: BoxFit.cover,
+                          height: double.infinity,
+                        ),
                       ),
                     ),
-                  );
-                },
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              restaurant['name'],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Description of ${restaurant['name']}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
